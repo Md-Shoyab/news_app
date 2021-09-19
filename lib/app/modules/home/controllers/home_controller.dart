@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:recipe/app/constants/api_errors.dart';
 import 'package:recipe/app/models/tesla_news_response.dart';
 import 'package:recipe/app/services/api_helper.dart';
 
@@ -23,15 +24,11 @@ class HomeController extends GetxController {
   void fetchNews() {
     apiHelper.getTeslaNews().then(
       (response) {
-        if (response.hasError) {
-          Get.back();
-          print('Api Has Error. ${response.statusCode}');
-        } else {
+        if (response.status.connectionError)
+          Get.snackbar(ApiErrors.noInternet, ApiErrors.noInternetDetails);
+        else {
           TeslaNewsResponse data = TeslaNewsResponse.fromJson(response.body);
           teslaNewsArticles.value = data.articles!;
-          Get.back();
-          print('Api Has Data.');
-          print(response.body.toString());
         }
       },
     );

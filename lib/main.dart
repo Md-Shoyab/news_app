@@ -13,8 +13,8 @@ Future<void> main() async {
   await SystemChrome.setPreferredOrientations(
     [DeviceOrientation.portraitUp],
   );
-  // runZonedGuarded<Future<void>>(
-    // () async {
+  runZonedGuarded<Future<void>>(
+    () async {
       runApp(
         GetMaterialApp(
           title: 'Recipes',
@@ -23,10 +23,10 @@ Future<void> main() async {
           debugShowCheckedModeBanner: false,
         ),
       );
-    // },
-    // (dynamic error, StackTrace stackTrace) {
-    //   print('<<----------ERROR--------->> \n$error');
-    //   print('<<----------STACK TRACE--------->> \n$stackTrace');
-    // },
-  // );
+    },
+    (dynamic error, StackTrace stackTrace) {
+      print('<<----------ERROR--------->> \n$error');
+      print('<<----------STACK TRACE--------->> \n$stackTrace');
+    },
+  );
 }
