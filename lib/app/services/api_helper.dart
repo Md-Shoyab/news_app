@@ -10,14 +10,12 @@ class ApiHelper extends GetConnect with BaseApiHelper {
   @override
   void onInit() {
     httpClient.baseUrl = API_BASE_URL;
-    httpClient.errorSafety = true;
+    httpClient.errorSafety = false;
+    httpClient.timeout = Duration(seconds: 5);
 
     httpClient.addRequestModifier(
       (Request<dynamic> request) {
         Loader().showLoadingWidget();
-        request.headers['X-RapidAPI-Host'] = 'yummly2.p.rapidapi.com';
-        request.headers['X-RapidAPI-Key'] =
-            'ca35e29268mshd2c7c2c0c173e6ep14a0fbjsn464288c29a06';
         print('----Add addRequestModifier Called----');
         return request;
       },
@@ -41,8 +39,8 @@ class ApiHelper extends GetConnect with BaseApiHelper {
   }
 
   @override
-  Future<Response> getReceipesList() async {
-    final response = await get(API_RECEIPES_LIST);
+  Future<Response> getTeslaNews() async {
+    final response = await get(API_TESLA_NEWS);
     return response;
   }
 }

@@ -12,15 +12,20 @@ class HomeView extends GetView<HomeController> {
         ),
         body: ListView.builder(
           itemBuilder: (context, index) {
-            return foodContainer();
+            return foodContainer(
+              controller.teslaNewsArticles[index].urlToImage!,
+              controller.teslaNewsArticles[index].title!,
+            );
           },
-          itemCount: 6,
+          itemCount: controller.teslaNewsArticles.length,
           shrinkWrap: true,
-        )
-        );
+        ));
   }
 
-  Container foodContainer() {
+  Container foodContainer(
+    String image,
+    String title,
+  ) {
     return Container(
       height: Get.height * .25,
       width: Get.width,
@@ -42,13 +47,13 @@ class HomeView extends GetView<HomeController> {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: Image.network(
-                controller.imageUrl.value,
+                image,
                 fit: BoxFit.cover,
               ),
             ),
           ),
           Text(
-            'Mutton Recipe',
+            'Title',
             style: Get.textTheme.headline4!.copyWith(
               color: Colors.white,
             ),
